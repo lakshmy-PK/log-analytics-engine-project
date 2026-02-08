@@ -1,0 +1,21 @@
+import time
+import dask.dataframe as dd
+from anamoly.detector import detect_anamoly
+
+LOG_FILE ="realtime_logs.csv"
+print("realtime anamoly detector started...")
+
+while True:
+    log_df= dd.read_csv(
+    LOG_FILE,
+    parse_dates=["timestamp"],
+    assume_missing=True    
+    )
+    anamolies=detect_anamoly(log_df)
+    result=anamolies.compute()
+    
+    if not result.empty:
+        print("\n Anamoly detected:\n")
+        print(result.tail())
+
+    time.sleep(5)# analyse every 5 sec 
