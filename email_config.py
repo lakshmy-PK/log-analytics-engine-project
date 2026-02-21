@@ -34,13 +34,13 @@ from email.message import EmailMessage
 #"pklakshmi894@gamil.com",
 #"warning:anomaly detected",)
 
-#when anomaly is detected and z-score >4 and less than -3
+#when anomaly is detected and z_score >4 and less than -3
 #prouter("/webhook/anomaly/detected/alert")
 #def anomaly_detected():
-#z-score
-#if(z-score>4 && z-score<-3):
+#z_score
+#if(z_score>4 && z_score<-3):
 #    send_mail()
-#z-score-[0.25,0.36,1.25,3.56,5.45]
+#z_score-[0.25,0.36,1.25,3.56,5.45]
 
 EMAIL="pklakshmy442@gmail.com"
 PASSWORD="ffdm umal bczz xixd"
@@ -50,31 +50,32 @@ SMTP_PORT=587
 
 
 def send_mail(to_mail:str,anomaly:dict):
-    subject="log anomaly detected"
-body=f"""
+ print(anomaly)
+ subject="log anomaly detected"
+ body=f"""
 anomaly detected in sysytem Logs
-     time window:{anomaly["timestamp"]}
-     error count:{anomaly["error_count"]}
-     z_score:{anomaly["z_score"]}
+time_window:{anomaly["time_window"]}
+error_count:{anomaly["error_count"]}
+z_score:{anomaly["z_score"]}
 
-     please review the log data
+please review the log data
     
-     Regards,
-     lakshmy pk
+Regards,
+lakshmy pk
       
     msg=EmailMessage()
     msg["Subject"]=subject
-    msg["From"]=from_email
-    msg["To"]=to_email
+    msg["From"]=EMAIL
+    msg["To"]=to_mail
     msg.set_content(body)
 
     with smtplib.SMTP("smtp.gmail.com",SMTP_PORT) as server:
         server.starttls()
-        server.login(pklakshmy442@gmail.com,ffdm umal bczz xixd")
+        server.login("pklakshmy442@gmail.com","ffdm umal bczz xixd")
         server.send_message(msg)"""
 
 anomaly = {
-    "timestamp": "2026-01-23 10:30",
+    "time_window": "2026-01-23 10:30",
     "error_count": 12,
     "z_score": 5.6
 }
